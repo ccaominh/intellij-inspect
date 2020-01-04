@@ -1,0 +1,10 @@
+{
+  "errors": {
+    "src/main/java/com/mycompany/app/App.java:17": "Package name 'org.mycompany.app' does not correspond to the file path 'com.mycompany.app'"
+  },
+  "warnings": {
+    "gradle-dirty.test": "Module 'gradle-dirty.test' sources do not depend on module 'gradle-dirty.main' sources",
+    "src/main/java/com/mycompany/app/App.java:19": "Can be package-private",
+    "src/main/java/com/mycompany/app/App.java:21": "Unnecessary semicolon <code>;</code> #loc"
+  }
+}

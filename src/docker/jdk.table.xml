@@ -1,0 +1,61 @@
+<!--
+Copyright 2020 Chi Cao Minh
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<application>
+  <component name="ProjectJdkTable">
+    <jdk version="2">
+      <name value="1.8" />
+      <type value="JavaSDK" />
+      <version value="1.8" />
+      <homePath value="/opt/java/openjdk/" />
+      <roots>
+        <annotationsPath>
+          <root type="composite">
+            <root url="jar://$APPLICATION_HOME_DIR$/lib/jdkAnnotations.jar!/" type="simple" />
+          </root>
+        </annotationsPath>
+        <classPath>
+          <root type="composite">
+            <root url="jar:///opt/java/openjdk/jre/lib/charsets.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/cldrdata.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/dnsns.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/icedtea-sound.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/jaccess.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/java-atk-wrapper.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/localedata.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/nashorn.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/sunec.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/sunjce_provider.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/sunpkcs11.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/ext/zipfs.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/jce.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/jsse.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/management-agent.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/resources.jar!/" type="simple" />
+            <root url="jar:///opt/java/openjdk/jre/lib/rt.jar!/" type="simple" />
+          </root>
+        </classPath>
+        <javadocPath>
+          <root type="composite" />
+        </javadocPath>
+        <sourcePath>
+          <root type="composite" />
+        </sourcePath>
+      </roots>
+      <additional />
+    </jdk>
+  </component>
+</application>
