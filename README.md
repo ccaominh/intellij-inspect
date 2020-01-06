@@ -1,3 +1,5 @@
+![Travis (.org)](https://img.shields.io/travis/ccaominh/intellij-inspect)
+
 # IntelliJ Inspect
 
 Docker container for running [IntelliJ IDEA code inspections](https://www.jetbrains.com/help/idea/code-inspection.html). If the analysis detects inspection violations, a human-readable report is printed and an exit code of 1 is returned. Otherwise, an exit code of 0 is returned if the analysis does not detect any inspection violations.

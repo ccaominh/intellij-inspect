@@ -88,6 +88,7 @@ private val PROBLEM_MODULE = Problem(
 
 private val REPORT = Report(listOf(PROBLEM))
 
+@Suppress("BlockingMethodInNonBlockingContext")  // FIXME
 class ParseTest : StringSpec() {
     init {
         "parses valid report XML" {

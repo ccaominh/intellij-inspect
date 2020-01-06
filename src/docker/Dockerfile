@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG INTELLIJ_VERSION=2018.3
+ARG INTELLIJ_VERSION=2019.1
 
 ARG USER="inspect"
 ARG HOME=/home/${USER}
@@ -35,7 +35,7 @@ RUN apk --no-cache add \
 
 WORKDIR ${INTELLIJ_TMPDIR}
 RUN mkdir -p ${INTELLIJ_TMPDIR} \
-  && curl -fsLS https://download.jetbrains.com/idea/ideaIC-${INTELLIJ_VERSION}-no-jdk.tar.gz \
+  && curl -fsLS https://download.jetbrains.com/idea/ideaIC-${INTELLIJ_VERSION}-no-jbr.tar.gz \
     | tar --strip-components 1 -xz
 
 
@@ -58,10 +58,11 @@ ARG USER
 ARG GROUP=${USER}
 
 RUN apk --no-cache add font-noto=0_git20170920-r0
-RUN addgroup -g 1000 ${GROUP} && adduser -u 1000 -G ${GROUP} -s /bin/sh -D ${USER}
+# Use uid/gid of 2000 to match the values for the "travis" user in Travis CI
+RUN addgroup -g 2000 ${GROUP} && adduser -u 2000 -G ${GROUP} -s /bin/sh -D ${USER}
 COPY --from=SETUP --chown=${USER}:${GROUP} ${TMPDIR} ${HOME}
 COPY --chown=${USER}:${GROUP} src/docker/jdk.table.xml ${HOME}/.IdeaIC${INTELLIJ_VERSION}/config/options/
-COPY --from=BUILD ${TMPDIR}/build/libs/intellij-inspect.jar ${HOME}
+COPY --chown=${USER}:${GROUP} --from=BUILD ${TMPDIR}/build/libs/intellij-inspect.jar ${HOME}
 
 WORKDIR ${HOME}
 USER ${USER}
