@@ -328,11 +328,11 @@ file(Directory.INTEGRATION_TEST).listFiles(File::isDirectory)!!.forEach { test -
                 )
             }
 
-// FIXME: Enable after suppressing benign errors printed by IntelliJ IDEA 2019+
-//            val stderr = errorOutput.toString()
-//            if (stderr.isNotEmpty()) {
-//                throw GradleException("Output on stderr:\n${stderr}")
-//            }
+            // NOTE: Benign errors printed by IntelliJ IDEA 2019+
+            val stderr = errorOutput.toString()
+            if (stderr.isNotEmpty()) {
+                throw GradleException("Output on stderr:\n${stderr}")
+            }
 
             val expectedExitCode = if (isClean) 0 else 1
             if (execResult.exitValue != expectedExitCode) {
