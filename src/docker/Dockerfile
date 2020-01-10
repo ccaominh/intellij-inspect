@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG INTELLIJ_VERSION=2019.1
+ARG INTELLIJ_VERSION=2018.3
+ARG INTELLIJ_FULL_VERSION=${INTELLIJ_VERSION}.6
 
 ARG USER="inspect"
 ARG HOME=/home/${USER}
@@ -23,7 +24,7 @@ ARG INTELLIJ_TMPDIR=${TMPDIR}/intellij
 FROM alpine:3.10 AS SETUP
 
 ARG INSPECTOR_VERSION
-ARG INTELLIJ_VERSION
+ARG INTELLIJ_FULL_VERSION
 ARG INTELLIJ_TMPDIR
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
@@ -35,7 +36,7 @@ RUN apk --no-cache add \
 
 WORKDIR ${INTELLIJ_TMPDIR}
 RUN mkdir -p ${INTELLIJ_TMPDIR} \
-  && curl -fsLS https://download.jetbrains.com/idea/ideaIC-${INTELLIJ_VERSION}-no-jbr.tar.gz \
+  && curl -fsLS https://download.jetbrains.com/idea/ideaIC-${INTELLIJ_FULL_VERSION}-no-jdk.tar.gz \
     | tar --strip-components 1 -xz
 
 
