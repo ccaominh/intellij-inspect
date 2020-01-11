@@ -1,4 +1,5 @@
-![Travis (.org)](https://img.shields.io/travis/ccaominh/intellij-inspect)
+[![Travis (.org)](https://img.shields.io/travis/ccaominh/intellij-inspect?logo=travis)](https://travis-ci.org/ccaominh/intellij-inspect)
+[![Docker Hub](https://img.shields.io/badge/docker-ccaominh%2Fintellij--inspect-%231488C6?logo=docker)](https://hub.docker.com/repository/docker/ccaominh/intellij-inspect)
 
 # IntelliJ Inspect
 
