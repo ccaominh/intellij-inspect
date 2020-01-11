@@ -50,7 +50,7 @@ repositories {
 
 object Docker {
     private const val NAME = "intellij-inspect"
-    private const val TAG = "1.0.0"
+    private const val TAG = "latest"
     const val IMAGE = "${NAME}:${TAG}"
 }
 

@@ -33,12 +33,25 @@ services:
   - docker
 
 before_install:
+  # Update docker version
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   - sudo apt-get update
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
   - docker version
+  # Display travis uid/gid
   - cat /etc/passwd | grep travis
 
-after_failure:
-  - ls -alR
+jobs:
+  include:
+    - stage: test
+      after_failure:
+        # Dump permissions for files and directories
+        - ls -alR
+    - stage: publish
+      if: tag IS present
+      install: skip
+      script:
+      - docker build -f src/docker/Dockerfile . -t intellij-inspect:${TRAVIS_TAG}
+      - docker login -u ccaominh -p ${DOCKER_PASSWORD}
+      - docker push intellij-inspect:${TRAVIS_TAG}
