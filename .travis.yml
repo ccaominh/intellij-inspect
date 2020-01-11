@@ -49,6 +49,6 @@ jobs:
       if: tag IS present
       install: skip
       script:
-      - docker build -f src/docker/Dockerfile . -t intellij-inspect:${TRAVIS_TAG}
+      - docker build -f src/docker/Dockerfile . -t ccaominh/intellij-inspect:${TRAVIS_TAG}
       - docker login -u ccaominh -p ${DOCKER_PASSWORD}
-      - docker push intellij-inspect:${TRAVIS_TAG}
+      - docker push ccaominh/intellij-inspect:${TRAVIS_TAG}
