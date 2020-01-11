@@ -17,10 +17,6 @@ dist: bionic
 
 language: java
 
-branches:
-  only: 
-    - master
-
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -45,6 +41,7 @@ before_install:
 jobs:
   include:
     - stage: test
+      if: (branch = master) OR (tag IS present)
       after_failure:
         # Dump permissions for files and directories
         - ls -alR
