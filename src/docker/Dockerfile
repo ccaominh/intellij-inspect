@@ -1,4 +1,4 @@
-# Copyright 2020 Chi Cao Minh
+# Copyright 2020-2021 Chi Cao Minh
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ ARG TMPDIR=/tmp/scratch
 ARG INTELLIJ_TMPDIR=${TMPDIR}/intellij
 
 
-FROM alpine:3.10 AS SETUP
+FROM alpine:3.14 AS SETUP
 
 ARG INSPECTOR_VERSION
 ARG INTELLIJ_FULL_VERSION
@@ -30,9 +30,9 @@ ARG INTELLIJ_TMPDIR
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 RUN apk --no-cache add \
-  curl=7.66.0-r0 \
-  tar=1.32-r0 \
-  unzip=6.0-r4
+  curl=7.79.1-r0 \
+  tar=1.34-r0 \
+  unzip=6.0-r9
 
 WORKDIR ${INTELLIJ_TMPDIR}
 RUN mkdir -p ${INTELLIJ_TMPDIR} \
@@ -40,7 +40,7 @@ RUN mkdir -p ${INTELLIJ_TMPDIR} \
     | tar --strip-components 1 -xz
 
 
-FROM adoptopenjdk/openjdk8:alpine-slim AS BUILD
+FROM adoptopenjdk/openjdk8:jdk8u292-b10-alpine-slim AS BUILD
 
 ARG TMPDIR
 
@@ -49,7 +49,7 @@ COPY . ${TMPDIR}
 RUN ./gradlew jar
 
 
-FROM adoptopenjdk/openjdk8:alpine-slim AS FINAL
+FROM adoptopenjdk/openjdk8:jdk8u292-b10-alpine-slim AS FINAL
 
 ARG HOME
 ARG TMPDIR
@@ -58,7 +58,7 @@ ARG USER
 
 ARG GROUP=${USER}
 
-RUN apk --no-cache add font-noto=0_git20170920-r0
+RUN apk --no-cache add font-noto=0_git20190623-r2
 # Use uid/gid of 2000 to match the values for the "travis" user in Travis CI
 RUN addgroup -g 2000 ${GROUP} && adduser -u 2000 -G ${GROUP} -s /bin/sh -D ${USER}
 COPY --from=SETUP --chown=${USER}:${GROUP} ${TMPDIR} ${HOME}

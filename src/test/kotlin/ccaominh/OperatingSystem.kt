@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Chi Cao Minh
+ * Copyright 2020-2021 Chi Cao Minh
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,4 +20,3 @@ internal const val PROP_OS = "os.name"
 internal const val LINUX = "Linux"
 internal const val MAC = "Mac OS X"
 internal const val WINDOWS = "Windows XP"
-
