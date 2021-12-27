@@ -94,6 +94,8 @@ val jar by tasks.getting(Jar::class) {
         attributes["Main-Class"] = "ccaominh.MainKt"
     }
 
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     // Make fat jar
     dependsOn(configurations.runtimeClasspath)
     from(sourceSets.main.get().output)
@@ -335,10 +337,11 @@ file(Directory.INTEGRATION_TEST).listFiles(File::isDirectory)!!.forEach { test -
             }
 
             val expectedExitCode = if (isClean) 0 else 1
-            if (execResult.exitValue != expectedExitCode) {
+            val actualExitCode = execResult!!.exitValue
+            if (actualExitCode != expectedExitCode) {
                 throw GradleException(
                     """
-                    |Expected exit code ${expectedExitCode} but was ${execResult.exitValue}"
+                    |Expected exit code ${expectedExitCode} but was ${actualExitCode}"
                     |
                     |Output:
                     |${standardOutput}
