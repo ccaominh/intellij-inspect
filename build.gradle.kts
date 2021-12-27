@@ -27,7 +27,7 @@ import java.util.*
 plugins {
     kotlin("jvm") version "1.3.60"
     jacoco
-    id("com.github.hierynomus.license-base") version "0.15.0"
+    id("com.github.hierynomus.license-base") version "0.16.1"
 }
 
 object Versions {
@@ -93,6 +93,8 @@ val jar by tasks.getting(Jar::class) {
     manifest {
         attributes["Main-Class"] = "ccaominh.MainKt"
     }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     // Make fat jar
     dependsOn(configurations.runtimeClasspath)
