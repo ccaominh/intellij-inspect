@@ -33,7 +33,7 @@ internal fun getIntellijInspectScript(): String? {
 }
 
 private fun getOsName(): String {
-    return System.getProperty("os.name").toLowerCase()
+    return System.getProperty("os.name").lowercase()
 }
 
 // For facilitating testing

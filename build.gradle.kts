@@ -25,13 +25,14 @@ import java.io.FileInputStream
 import java.util.*
 
 plugins {
-    kotlin("jvm") version "1.3.60"
+    kotlin("jvm") version "1.6.10"
     jacoco
     id("com.github.hierynomus.license-base") version "0.16.1"
 }
 
 object Versions {
     const val JACKSON = "2.10.1"
+    const val KOTEST = "5.0.3"
 }
 
 dependencies {
@@ -40,7 +41,8 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${Versions.JACKSON}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.JACKSON}")
     implementation("com.github.ajalt:clikt:2.3.0")
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:${Versions.KOTEST}")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:${Versions.KOTEST}")
     testRuntimeOnly("org.slf4j:slf4j-nop:1.7.30")
 }
 
@@ -438,10 +440,10 @@ tasks.jacocoTestReport {
 
 tasks.jacocoTestCoverageVerification {
     violationRules {
-        rule { limit { counter = "BRANCH";      minimum = 0.91.toBigDecimal() } }
-        rule { limit { counter = "COMPLEXITY";  minimum = 0.76.toBigDecimal() } }
+        rule { limit { counter = "BRANCH";      minimum = 0.88.toBigDecimal() } }
+        rule { limit { counter = "COMPLEXITY";  minimum = 0.77.toBigDecimal() } }
         rule { limit { counter = "INSTRUCTION"; minimum = 0.85.toBigDecimal() } }
-        rule { limit { counter = "LINE";        minimum = 0.85.toBigDecimal() } }
-        rule { limit { counter = "METHOD";      minimum = 0.69.toBigDecimal() } }
+        rule { limit { counter = "LINE";        minimum = 0.88.toBigDecimal() } }
+        rule { limit { counter = "METHOD";      minimum = 0.73.toBigDecimal() } }
     }
 }

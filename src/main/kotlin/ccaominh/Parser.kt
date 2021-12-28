@@ -31,8 +31,8 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 private const val FILE_NAME_PREFIX = "file://\$PROJECT_DIR\$/"
 
 private val MAPPER: ObjectMapper = XmlMapper(JacksonXmlModule().apply { setDefaultUseWrapper(false) })
-        .registerModule(KotlinModule())
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    .registerModule(KotlinModule())
+    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
 @Throws(JsonParseException::class)
 fun parseReport(xml: String): Report {
@@ -45,8 +45,8 @@ data class Report(
 ) {
     fun getSummary(levels: Set<String>): List<String> {
         return problems
-                .filter { p -> p.getSeverity() in levels }
-                .map { p -> p.getSummary() }
+            .filter { p -> p.getSeverity() in levels }
+            .map { p -> p.getSummary() }
     }
 }
 

@@ -18,15 +18,15 @@ package ccaominh
 
 import com.github.ajalt.clikt.core.PrintHelpMessage
 import com.github.ajalt.clikt.core.UsageError
-import io.kotlintest.TestCase
-import io.kotlintest.data.forall
-import io.kotlintest.extensions.system.OverrideMode
-import io.kotlintest.extensions.system.SystemPropertyTestListener
-import io.kotlintest.extensions.system.withSystemProperty
-import io.kotlintest.matchers.string.shouldStartWith
-import io.kotlintest.shouldBe
-import io.kotlintest.shouldThrow
-import io.kotlintest.tables.row
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.test.TestCase
+import io.kotest.data.forAll
+import io.kotest.data.row
+import io.kotest.extensions.system.OverrideMode
+import io.kotest.extensions.system.SystemPropertyTestListener
+import io.kotest.extensions.system.withSystemProperty
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldStartWith
 import java.io.File
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
@@ -34,7 +34,7 @@ import kotlin.reflect.jvm.isAccessible
 class IsValidIntellijTest : TempDirStringSpec() {
     init {
         "fails if no OS script present" {
-            forall(
+            forAll(
                 row(LINUX, "bin/inspect.bat"),
                 row(MAC, "bin/inspect.sh"),
                 row(WINDOWS, "bin\\inspect.sh"),
@@ -49,7 +49,7 @@ class IsValidIntellijTest : TempDirStringSpec() {
         }
 
         "succeeds if OS script present" {
-            forall(
+            forAll(
                 row(LINUX, "bin/inspect.sh"),
                 row(MAC, "Contents/bin/inspect.sh"),
                 row(WINDOWS, "bin\\inspect.bat")
@@ -141,7 +141,7 @@ class CliTest : TempDirStringSpec() {
         }
 
         "prints help with help option" {
-            forall(
+            forAll(
                 row("-h"),
                 row("--help")
             ) { helpOpt ->
@@ -162,7 +162,7 @@ class CliTest : TempDirStringSpec() {
             val makeDir: (String) -> String = { s: String -> createDir(s).absolutePath }
             val makeNoop: (String) -> String = { s: String -> s }
 
-            forall(
+            forAll(
                 row("output", "path/to/output/", makeNoop),
                 row("directory", "path/to/dir/", makeDir),
                 row("scope", "MY_SCOPE", makeNoop)
@@ -180,7 +180,7 @@ class CliTest : TempDirStringSpec() {
         }
 
         "sets intellij, project, and levels prop with args and with level option" {
-            forall(
+            forAll(
                 row("-l"),
                 row("--levels")
             ) { opt ->
@@ -197,7 +197,7 @@ class CliTest : TempDirStringSpec() {
             val validProject = createProject()
             val validProfile = createProfile()
 
-            forall(
+            forAll(
                 row(invalid, validProject, validProfile, "INTELLIJ"),
                 row(validIntellij, invalid, validProfile, "PROJECT"),
                 row(validIntellij, validProject, invalid, "PROFILE")
@@ -250,10 +250,10 @@ class CliTest : TempDirStringSpec() {
     @Suppress("UNCHECKED_CAST")
     private fun <T> readProp(propName: String): T {
         return target::class.memberProperties
-                .first { it.name == propName }
-                .also { it.isAccessible = true }
-                .getter
-                .call(target) as T
+            .first { it.name == propName }
+            .also { it.isAccessible = true }
+            .getter
+            .call(target) as T
     }
 }
 

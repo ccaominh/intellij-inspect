@@ -54,11 +54,11 @@ class Cli(
     printHelpOnEmptyArgs = true
 ) {
     private val intellij by argument(help = "Absolute path to IntelliJ installation")
-            .validate {
-                if (!isValidIntellij(it)) {
-                    fail("Cannot find IntelliJ inspect script in \"${it}\". Is it a valid IntelliJ installation?")
-                }
+        .validate {
+            if (!isValidIntellij(it)) {
+                fail("Cannot find IntelliJ inspect script in \"${it}\". Is it a valid IntelliJ installation?")
             }
+        }
 
     private val project by argument(
         help = "Absolute path to IntelliJ project directory, pom.xml, or build.gradle, etc. to analyze"
@@ -69,13 +69,14 @@ class Cli(
     }
 
     private val profile by argument(help = "Absolute path to inspection profile to use")
-            .validate {
-                if (!isValidProfile(it)) {
-                    fail("Is \"${it}\" a valid XML file?")
-                }
+        .validate {
+            if (!isValidProfile(it)) {
+                fail("Is \"${it}\" a valid XML file?")
             }
+        }
 
-    private val directory by option("-d", "--directory",
+    private val directory by option(
+        "-d", "--directory",
         help = "Absolute path to directory within project to be inspected"
     ).validate {
         if (!isValidSubdir(it)) {
@@ -83,11 +84,13 @@ class Cli(
         }
     }
 
-    private val levels by option("-l", "--levels",
+    private val levels by option(
+        "-l", "--levels",
         help = "Inspection severity levels to analyze ${default(DEFAULT_LEVELS.joinToString(separator = ","))}"
     ).split(",").default(DEFAULT_LEVELS)
 
-    private val output by option("-o", "--output",
+    private val output by option(
+        "-o", "--output",
         help = "Absolute path to output inspection analysis results ${default(DEFAULT_OUTPUT)}"
     ).default(DEFAULT_OUTPUT)
 
