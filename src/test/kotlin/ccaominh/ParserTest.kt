@@ -158,7 +158,7 @@ class ParseTest : StringSpec() {
                             attributeKey = PROBLEM_CLASS_ATTRIBUTE_KEY,
                             value = PROBLEM_CLASS_VALUE
                         ),
-                        hints = null,
+                        hints = emptyList(),
                         description = DESCRIPTION
                     )
                 )
