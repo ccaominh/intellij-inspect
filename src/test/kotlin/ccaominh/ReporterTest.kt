@@ -16,7 +16,7 @@
 
 package ccaominh
 
-import io.kotlintest.shouldBe
+import io.kotest.matchers.shouldBe
 
 class GetOutputFilesTest : TempDirStringSpec() {
     init {

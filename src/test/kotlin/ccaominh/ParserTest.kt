@@ -17,13 +17,13 @@
 package ccaominh
 
 import com.fasterxml.jackson.core.JsonParseException
-import io.kotlintest.TestCase
-import io.kotlintest.data.forall
-import io.kotlintest.shouldBe
-import io.kotlintest.shouldNotBe
-import io.kotlintest.shouldThrow
-import io.kotlintest.specs.StringSpec
-import io.kotlintest.tables.row
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.test.TestCase
+import io.kotest.data.forAll
+import io.kotest.data.row
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 
 private const val RELATIVE_FILE = "src/main/java/com/company/Main.java"
 private const val FILE = "file://${'$'}PROJECT_DIR${'$'}/$RELATIVE_FILE"
@@ -55,17 +55,15 @@ private val PROBLEM = Problem(
         attributeKey = PROBLEM_CLASS_ATTRIBUTE_KEY,
         value = PROBLEM_CLASS_VALUE
     ),
-    hints = listOf(Hint(
-        value = HINT_VALUE
-    )),
+    hints = listOf(Hint(value = HINT_VALUE)),
     description = DESCRIPTION
 )
 
 private const val PROBLEM_MODULE_LOCATION = "gradle-clean.test"
 private const val PROBLEM_MODULE_DESCRIPTION =
-        "Module '${PROBLEM_MODULE_LOCATION}' sources do not depend on module 'gradle-clean.main' sources"
+    "Module '${PROBLEM_MODULE_LOCATION}' sources do not depend on module 'gradle-clean.main' sources"
 private const val PROBLEM_MODULE_SUMMARY =
-        "[${PROBLEM_CLASS_SEVERITY}] ${PROBLEM_MODULE_LOCATION} -- ${PROBLEM_MODULE_DESCRIPTION}"
+    "[${PROBLEM_CLASS_SEVERITY}] ${PROBLEM_MODULE_LOCATION} -- ${PROBLEM_MODULE_DESCRIPTION}"
 
 private val PROBLEM_MODULE = Problem(
     file = PROBLEM_MODULE_LOCATION,
@@ -80,9 +78,7 @@ private val PROBLEM_MODULE = Problem(
         attributeKey = PROBLEM_CLASS_ATTRIBUTE_KEY,
         value = "Unnecessary module dependency"
     ),
-    hints = listOf(Hint(
-        value = "gradle-clean.main"
-    )),
+    hints = listOf(Hint(value = "gradle-clean.main")),
     description = PROBLEM_MODULE_DESCRIPTION
 )
 
@@ -108,22 +104,24 @@ class ParseTest : StringSpec() {
                   </problem>
                 </problems>
             """
-            val expected = Report(listOf(
-                Problem(
-                    file = FILE,
-                    packageName = PACKAGE,
-                    entryPoint = EntryPoint(
-                        type = ENTRY_POINT_TYPE,
-                        fullyQualifiedName = ENTRY_POINT_FQNAME
-                    ),
-                    problemClass = ProblemClass(
-                        severity = PROBLEM_CLASS_SEVERITY,
-                        attributeKey = PROBLEM_CLASS_ATTRIBUTE_KEY,
-                        value = PROBLEM_CLASS_VALUE
-                    ),
-                    description = DESCRIPTION
+            val expected = Report(
+                listOf(
+                    Problem(
+                        file = FILE,
+                        packageName = PACKAGE,
+                        entryPoint = EntryPoint(
+                            type = ENTRY_POINT_TYPE,
+                            fullyQualifiedName = ENTRY_POINT_FQNAME
+                        ),
+                        problemClass = ProblemClass(
+                            severity = PROBLEM_CLASS_SEVERITY,
+                            attributeKey = PROBLEM_CLASS_ATTRIBUTE_KEY,
+                            value = PROBLEM_CLASS_VALUE
+                        ),
+                        description = DESCRIPTION
+                    )
                 )
-            ))
+            )
 
             val report = parseReport(xml)
             report shouldBe expected
@@ -144,25 +142,27 @@ class ParseTest : StringSpec() {
                   </problem>
                 </problems>
             """
-            val expected = Report(listOf(
-                Problem(
-                    file = FILE,
-                    line = LINE,
-                    module = MODULE,
-                    packageName = PACKAGE,
-                    entryPoint = EntryPoint(
-                        type = ENTRY_POINT_TYPE,
-                        fullyQualifiedName = ENTRY_POINT_FQNAME
-                    ),
-                    problemClass = ProblemClass(
-                        severity = PROBLEM_CLASS_SEVERITY,
-                        attributeKey = PROBLEM_CLASS_ATTRIBUTE_KEY,
-                        value = PROBLEM_CLASS_VALUE
-                    ),
-                    hints = null,
-                    description = DESCRIPTION
+            val expected = Report(
+                listOf(
+                    Problem(
+                        file = FILE,
+                        line = LINE,
+                        module = MODULE,
+                        packageName = PACKAGE,
+                        entryPoint = EntryPoint(
+                            type = ENTRY_POINT_TYPE,
+                            fullyQualifiedName = ENTRY_POINT_FQNAME
+                        ),
+                        problemClass = ProblemClass(
+                            severity = PROBLEM_CLASS_SEVERITY,
+                            attributeKey = PROBLEM_CLASS_ATTRIBUTE_KEY,
+                            value = PROBLEM_CLASS_VALUE
+                        ),
+                        hints = null,
+                        description = DESCRIPTION
+                    )
                 )
-            ))
+            )
 
             val report = parseReport(xml)
             report shouldBe expected
@@ -208,7 +208,7 @@ class ParseTest : StringSpec() {
 class ReportTest : StringSpec() {
     init {
         "returns matching summary" {
-            forall(
+            forAll(
                 row(setOf(PROBLEM_CLASS_SEVERITY), listOf(SUMMARY)),
                 row(emptySet(), emptyList())
             ) { levels, expected ->
@@ -244,7 +244,7 @@ class ProblemClassTest : StringSpec() {
 
     init {
         "considers all properties for equals()" {
-            forall(
+            forAll(
                 row(target, true),
                 row(null, false),
                 row(ProblemClass(target.severity, target.attributeKey, target.value), true),

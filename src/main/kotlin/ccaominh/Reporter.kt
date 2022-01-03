@@ -21,8 +21,8 @@ import java.io.IOException
 
 fun getOutputFiles(outputDir: String): Sequence<File> {
     return File(outputDir).walk()
-            .maxDepth(1)
-            .filter { file -> file.isFile && !file.name.startsWith(".") && file.extension == "xml" }
+        .maxDepth(1)
+        .filter { file -> file.isFile && !file.name.startsWith(".") && file.extension == "xml" }
 }
 
 fun getReportSummary(file: File, levels: Set<String>): String? {

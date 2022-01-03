@@ -16,9 +16,9 @@
 
 package ccaominh
 
-import io.kotlintest.TestCase
-import io.kotlintest.TestResult
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.test.TestCase
+import io.kotest.core.test.TestResult
 import java.io.File
 
 /**
@@ -29,7 +29,7 @@ open class TempDirStringSpec : StringSpec() {
 
     override fun beforeTest(testCase: TestCase) {
         super.beforeTest(testCase)
-        tempDir = createTempDir()
+        tempDir = kotlin.io.path.createTempDirectory().toFile()
     }
 
     override fun afterTest(testCase: TestCase, result: TestResult) {

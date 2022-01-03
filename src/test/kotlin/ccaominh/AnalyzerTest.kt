@@ -16,20 +16,20 @@
 
 package ccaominh
 
-import io.kotlintest.TestCase
-import io.kotlintest.data.forall
-import io.kotlintest.extensions.system.OverrideMode
-import io.kotlintest.extensions.system.withSystemProperty
-import io.kotlintest.shouldBe
-import io.kotlintest.shouldThrow
-import io.kotlintest.specs.StringSpec
-import io.kotlintest.tables.row
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.test.TestCase
+import io.kotest.data.forAll
+import io.kotest.data.row
+import io.kotest.extensions.system.OverrideMode
+import io.kotest.extensions.system.withSystemProperty
+import io.kotest.matchers.shouldBe
 import java.io.File
 
 class GetIntellijInspectScriptTest : StringSpec() {
     init {
         "returns correct script for OS" {
-            forall(
+            forAll(
                 row(LINUX, "bin/inspect.sh"),
                 row(MAC, "Contents/bin/inspect.sh"),
                 row(WINDOWS, "bin\\inspect.bat"),
@@ -54,7 +54,7 @@ class AnalyzeTest : StringSpec() {
 
     init {
         "finds violations if they exist" {
-            forall(
+            forAll(
                 row(emptyGatherer, nameReporter, true),
                 row(singleGatherer, nullReporter, true),
                 row(singleGatherer, emptyReporter, true),
@@ -78,7 +78,7 @@ class SetupInspectScope : TempDirStringSpec() {
 
     init {
         "sets up correct properties for OS" {
-            forall(
+            forAll(
                 row(LINUX, "bin/idea.properties"),
                 row(MAC, "Contents/bin/idea.properties"),
                 row(WINDOWS, "bin\\idea.properties")
