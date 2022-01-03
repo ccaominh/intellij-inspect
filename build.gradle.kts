@@ -31,7 +31,7 @@ plugins {
 }
 
 object Versions {
-    const val JACKSON = "2.10.1"
+    const val JACKSON = "2.12.3"
     const val KOTEST = "5.0.3"
 }
 
