@@ -146,7 +146,7 @@ val dockerBuild by tasks.registering(Exec::class) {
 val hadolint by tasks.registering(Exec::class) {
     group = "Verification"
     description = "Run hadolint."
-    commandLine = listOf("docker", "run", "--rm", "-i", "hadolint/hadolint:v1.17.2")
+    commandLine = listOf("docker", "run", "--rm", "-i", "hadolint/hadolint:v2.8.0")
 
     inputs.files(file(Files.DOCKERFILE))
             .withPropertyName("input")
