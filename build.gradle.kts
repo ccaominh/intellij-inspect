@@ -40,7 +40,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:${Versions.JACKSON}")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${Versions.JACKSON}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.JACKSON}")
-    implementation("com.github.ajalt:clikt:2.3.0")
+    implementation("com.github.ajalt.clikt:clikt:3.2.0")
     testImplementation("io.kotest:kotest-runner-junit5-jvm:${Versions.KOTEST}")
     testImplementation("io.kotest:kotest-assertions-core-jvm:${Versions.KOTEST}")
     testRuntimeOnly("org.slf4j:slf4j-nop:1.7.30")
