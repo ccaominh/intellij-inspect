@@ -3,7 +3,6 @@
     "src/main/java/com/mycompany/app/App.java:17": "Package name 'org.mycompany.app' does not correspond to the file path 'com.mycompany.app'"
   },
   "warnings": {
-    "src/main/java/com/mycompany/app/App.java:27": "Unnecessary semicolon <code>;</code> #loc",
-    "src/main/java/com/mycompany/app/App.java:23": "Can be package-private"
+    "src/main/java/com/mycompany/app/App.java:27": "Unnecessary semicolon <code>;</code> #loc"
   }
 }

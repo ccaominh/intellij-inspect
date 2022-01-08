@@ -1,12 +1,9 @@
 <!--
 Copyright 2020-2022 Chi Cao Minh
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     https://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,35 +14,89 @@ limitations under the License.
 <application>
   <component name="ProjectJdkTable">
     <jdk version="2">
-      <name value="1.8" />
+      <name value="11" />
       <type value="JavaSDK" />
-      <version value="1.8" />
-      <homePath value="/opt/java/openjdk/" />
+      <version value="java version &quot;11.0.11&quot;" />
+      <homePath value="/opt/java/openjdk" />
       <roots>
         <annotationsPath>
           <root type="composite">
-            <root url="jar://$APPLICATION_HOME_DIR$/lib/jdkAnnotations.jar!/" type="simple" />
+            <root url="jar://$APPLICATION_HOME_DIR$/plugins/java/lib/jdkAnnotations.jar!/" type="simple" />
           </root>
         </annotationsPath>
         <classPath>
           <root type="composite">
-            <root url="jar:///opt/java/openjdk/jre/lib/charsets.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/cldrdata.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/dnsns.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/icedtea-sound.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/jaccess.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/java-atk-wrapper.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/localedata.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/nashorn.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/sunec.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/sunjce_provider.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/sunpkcs11.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/ext/zipfs.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/jce.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/jsse.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/management-agent.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/resources.jar!/" type="simple" />
-            <root url="jar:///opt/java/openjdk/jre/lib/rt.jar!/" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.base" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.compiler" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.datatransfer" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.desktop" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.instrument" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.logging" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.management" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.management.rmi" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.naming" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.net.http" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.prefs" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.rmi" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.scripting" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.se" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.security.jgss" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.security.sasl" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.smartcardio" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.sql" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.sql.rowset" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.transaction.xa" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.xml" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/java.xml.crypto" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.accessibility" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.aot" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.attach" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.charsets" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.compiler" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.crypto.cryptoki" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.crypto.ec" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.dynalink" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.editpad" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.hotspot.agent" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.httpserver" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.internal.ed" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.internal.jvmstat" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.internal.le" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.internal.opt" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.internal.vm.ci" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.internal.vm.compiler" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.internal.vm.compiler.management" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jartool" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.javadoc" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jcmd" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jconsole" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jdeps" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jdi" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jdwp.agent" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jfr" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jlink" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jshell" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jsobject" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.jstatd" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.localedata" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.management" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.management.agent" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.management.jfr" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.naming.dns" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.naming.ldap" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.naming.rmi" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.net" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.pack" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.rmic" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.scripting.nashorn" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.scripting.nashorn.shell" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.sctp" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.security.auth" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.security.jgss" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.unsupported" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.unsupported.desktop" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.xml.dom" type="simple" />
+            <root url="jrt:///opt/java/openjdk!/jdk.zipfs" type="simple" />
           </root>
         </classPath>
         <javadocPath>

@@ -55,7 +55,7 @@ data class Problem(
     val line: Int? = null,
     val module: String? = null,
     @JacksonXmlProperty(localName = "package")
-    val packageName: String,
+    val packageName: String? = null,  // optional, since may not be source code
     @JacksonXmlProperty(localName = "entry_point")
     val entryPoint: EntryPoint,
     @JacksonXmlProperty(localName = "problem_class")

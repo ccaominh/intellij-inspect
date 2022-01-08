@@ -51,7 +51,7 @@ repositories {
 }
 
 object Docker {
-    private const val NAME = "intellij-inspect"
+    const val NAME = "intellij-inspect"
     private const val TAG = "latest"
     const val IMAGE = "${NAME}:${TAG}"
 }
@@ -113,13 +113,13 @@ val jar by tasks.getting(Jar::class) {
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "11"
 }
 
 
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "11"
 }
 
 
@@ -140,6 +140,27 @@ val dockerBuild by tasks.registering(Exec::class) {
             .withPathSensitivity(PathSensitivity.RELATIVE)
     outputs.files(file("${buildDir}/reports/${name}.out"))
             .withPropertyName("output")
+}
+
+
+val dockerBuildX11 by tasks.registering(Exec::class) {
+    dependsOn(hadolint)
+
+    group = "Build"
+    description = "Build docker image with X11."
+    commandLine = listOf(
+        "docker", "build",
+        "-f", Files.DOCKERFILE,
+        "--build-arg", "TARGET=dev",
+        ".",
+        "-t", "${Docker.NAME}:x11"
+    )
+
+    inputs.files(fileTree(file(Directory.SOURCE)))
+        .withPropertyName("input")
+        .withPathSensitivity(PathSensitivity.RELATIVE)
+    outputs.files(file("${buildDir}/reports/${name}.out"))
+        .withPropertyName("output")
 }
 
 
@@ -266,6 +287,9 @@ file(Directory.INTEGRATION_TEST).listFiles(File::isDirectory)!!.forEach { test -
     val isIdea = test.name.startsWith("idea") || isScope
     val isMaven = test.name.startsWith("maven")
 
+    val outputDir = file("${buildDir}/test/${test.name}")
+    val m2Dir = file("${outputDir}/.m2")
+
     val inspectionProfile = if (isIdea) ".idea/inspectionProfiles/Project_Default.xml" else "inspectionProfile.xml"
     val project = root + when {
         isGradle -> "/build.gradle"
@@ -276,11 +300,17 @@ file(Directory.INTEGRATION_TEST).listFiles(File::isDirectory)!!.forEach { test -
     val command = mutableListOf(
         "docker", "run",
         "--rm",
-        "-v", "${test.absolutePath}:/project",
+        "-v", "${test.absolutePath}:/project"
+    )
+    if (isMaven) {
+      // For some reason, inspection hangs without this for IntelliJ IDEA 2020+
+      command.addAll(listOf("-v", "${m2Dir.absolutePath}:/home/inspect/.m2"))
+    }
+    command.addAll(listOf(
         Docker.IMAGE,
         project,
         "${root}/${inspectionProfile}"
-    )
+    ))
     if (isScope) {
         command.addAll(listOf("--scope", "Main"))
     }
@@ -300,12 +330,16 @@ file(Directory.INTEGRATION_TEST).listFiles(File::isDirectory)!!.forEach { test -
                 .plus(fileTree(test)))
                 .withPropertyName("input")
                 .withPathSensitivity(PathSensitivity.RELATIVE)
-        val outputDir = file("${buildDir}/test/${test.name}")
         outputs.dir(outputDir)
                 .withPropertyName("output")
 
         doFirst {
             logger.lifecycle("Testing ${test.name} project...")
+
+           if (isMaven) {
+              // For some reason, inspection hangs without this for IntelliJ IDEA 2020+
+              mkdir(m2Dir)
+            }
         }
 
         doLast {
@@ -335,7 +369,7 @@ file(Directory.INTEGRATION_TEST).listFiles(File::isDirectory)!!.forEach { test -
             // NOTE: Benign errors printed by IntelliJ IDEA 2019+
             val stderr = errorOutput.toString()
             if (stderr.isNotEmpty()) {
-                throw GradleException("Output on stderr:\n${stderr}")
+                logger.warn("Output on stderr:\n${stderr}")
             }
 
             val expectedExitCode = if (isClean) 0 else 1
@@ -415,7 +449,8 @@ val inspect by tasks.registering(Exec::class) {
         "/project/build.gradle.kts",
         "/project/.idea/inspectionProfiles/Project_Default.xml",
         "-d", "/project/src",
-        "-o", "/project/build/inspect/"
+        "-o", "/project/build/inspect/",
+        "-l", "ERROR"
     )
 
     inputs.files(fileTree(file(Directory.SOURCE)).plus(fileTree(file(Directory.DOCKER))))

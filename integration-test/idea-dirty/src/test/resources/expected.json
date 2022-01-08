@@ -3,7 +3,6 @@
     "src/main/java/com/company/Main.java:17": "Package name 'org.company' does not correspond to the file path 'com.company'"
   },
   "warnings": {
-    "src/main/java/com/company/Main.java:19": "Can be package-private",
     "src/main/java/com/company/Main.java:21": "Unnecessary semicolon <code>;</code> #loc"
   }
 }
